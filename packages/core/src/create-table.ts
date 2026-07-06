@@ -360,7 +360,8 @@ export function createTable<TData>(initialOptions: TableOptions<TData>): Table<T
   function scheduleFetch(): void {
     if (!mounted || fetchQueued) return;
     fetchQueued = true;
-    queueMicrotask(() => {
+    // Microtask coalescing without queueMicrotask (keeps lib requirements at ES2020).
+    void Promise.resolve().then(() => {
       fetchQueued = false;
       if (mounted) void runFetch();
     });

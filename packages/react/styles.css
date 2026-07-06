@@ -1,0 +1,350 @@
+/*
+ * @tablekit/react default theme.
+ * Every value is a CSS variable with a light-mode fallback, so overriding is
+ * as simple as setting --tk-* on any ancestor (see @tablekit/theme's
+ * themeToCssVariables). All selectors are :where()-wrapped where practical to
+ * keep specificity low for consumer overrides.
+ */
+
+.tk-root {
+  --_tk-surface: var(--tk-color-surface, #ffffff);
+  --_tk-surface-muted: var(--tk-color-surface-muted, #f8fafc);
+  --_tk-surface-hover: var(--tk-color-surface-hover, #f1f5f9);
+  --_tk-surface-selected: var(--tk-color-surface-selected, #eef2ff);
+  --_tk-text: var(--tk-color-text, #0f172a);
+  --_tk-text-muted: var(--tk-color-text-muted, #64748b);
+  --_tk-accent: var(--tk-color-accent, #4f46e5);
+  --_tk-accent-fg: var(--tk-color-accent-foreground, #ffffff);
+  --_tk-border: var(--tk-color-border, #e2e8f0);
+  --_tk-danger: var(--tk-color-danger, #b91c1c);
+  --_tk-danger-surface: var(--tk-color-danger-surface, #fef2f2);
+  --_tk-cell-x: var(--tk-spacing-cell-x, 12px);
+  --_tk-cell-y: var(--tk-spacing-cell-y, 10px);
+  --_tk-gap: var(--tk-spacing-inline-gap, 6px);
+  --_tk-radius: var(--tk-radius-container, 10px);
+  --_tk-radius-control: var(--tk-radius-control, 4px);
+
+  font-family: var(--tk-font-family, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  font-size: var(--tk-font-size, 14px);
+  line-height: var(--tk-line-height, 1.45);
+  color: var(--_tk-text);
+}
+
+/* Built-in dark scheme: <DataTable colorScheme="dark" /> */
+.tk-root[data-tk-color-scheme="dark"] {
+  --_tk-surface: var(--tk-color-surface, #0f172a);
+  --_tk-surface-muted: var(--tk-color-surface-muted, #1e293b);
+  --_tk-surface-hover: var(--tk-color-surface-hover, #1e293b);
+  --_tk-surface-selected: var(--tk-color-surface-selected, #312e81);
+  --_tk-text: var(--tk-color-text, #f1f5f9);
+  --_tk-text-muted: var(--tk-color-text-muted, #94a3b8);
+  --_tk-accent: var(--tk-color-accent, #818cf8);
+  --_tk-accent-fg: var(--tk-color-accent-foreground, #0f172a);
+  --_tk-border: var(--tk-color-border, #334155);
+  --_tk-danger: var(--tk-color-danger, #fca5a5);
+  --_tk-danger-surface: var(--tk-color-danger-surface, #450a0a);
+}
+
+.tk-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--_tk-border);
+  border-radius: var(--_tk-radius);
+  background: var(--_tk-surface);
+}
+
+.tk-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--_tk-surface);
+}
+
+.tk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:where(.tk-table) th,
+:where(.tk-table) td {
+  padding: var(--_tk-cell-y) var(--_tk-cell-x);
+  text-align: left;
+  border-bottom: 1px solid var(--_tk-border);
+  background: inherit;
+}
+
+.tk-head tr {
+  background: var(--_tk-surface-muted);
+}
+
+.tk-header-cell {
+  position: relative;
+  font-size: var(--tk-header-font-size, 13px);
+  font-weight: var(--tk-header-font-weight, 600);
+  color: var(--_tk-text-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.tk-body tr:last-child td {
+  border-bottom: none;
+}
+
+.tk-row {
+  background: var(--_tk-surface);
+  transition: background-color 120ms ease;
+}
+
+.tk-row:hover {
+  background: var(--_tk-surface-hover);
+}
+
+.tk-row[tabindex]:focus-visible {
+  outline: 2px solid var(--_tk-accent);
+  outline-offset: -2px;
+}
+
+.tk-row-selected,
+.tk-row-selected:hover {
+  background: var(--_tk-surface-selected);
+}
+
+.tk-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--_tk-gap);
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tk-sort-button:focus-visible {
+  outline: 2px solid var(--_tk-accent);
+  outline-offset: 2px;
+  border-radius: var(--_tk-radius-control);
+}
+
+.tk-sort-icon {
+  font-size: 0.75em;
+  color: var(--_tk-accent);
+}
+
+th[aria-sort] .tk-sort-icon {
+  color: var(--_tk-accent);
+}
+
+th:not([aria-sort]) .tk-sort-icon {
+  color: var(--_tk-text-muted);
+  opacity: 0.6;
+}
+
+.tk-resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.tk-resize-handle:hover {
+  background: var(--_tk-accent);
+  opacity: 0.4;
+}
+
+.tk-checkbox-cell,
+.tk-expander-cell {
+  width: 36px;
+  text-align: center;
+}
+
+.tk-checkbox {
+  accent-color: var(--_tk-accent);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.tk-expander {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--_tk-text-muted);
+  font: inherit;
+  padding: 0 4px;
+}
+
+.tk-expander:focus-visible {
+  outline: 2px solid var(--_tk-accent);
+  border-radius: var(--_tk-radius-control);
+}
+
+.tk-group-row td {
+  background: var(--_tk-surface-muted);
+  font-weight: 600;
+}
+
+.tk-group-count {
+  color: var(--_tk-text-muted);
+  font-weight: 400;
+}
+
+.tk-detail-row td {
+  background: var(--_tk-surface-muted);
+}
+
+.tk-actions-cell {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.tk-action-button {
+  border: 1px solid var(--_tk-border);
+  background: var(--_tk-surface);
+  color: var(--_tk-text);
+  border-radius: var(--_tk-radius-control);
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 0.9em;
+  cursor: pointer;
+  margin-left: var(--_tk-gap);
+}
+
+.tk-action-button:hover:not(:disabled) {
+  background: var(--_tk-surface-hover);
+}
+
+.tk-action-button:focus-visible {
+  outline: 2px solid var(--_tk-accent);
+  outline-offset: 1px;
+}
+
+.tk-action-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tk-action-danger {
+  color: var(--_tk-danger);
+}
+
+.tk-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tk-search {
+  border: 1px solid var(--_tk-border);
+  background: var(--_tk-surface);
+  color: var(--_tk-text);
+  border-radius: var(--_tk-radius-control);
+  padding: 7px 10px;
+  font: inherit;
+  min-width: 220px;
+}
+
+.tk-search:focus-visible {
+  outline: 2px solid var(--_tk-accent);
+  outline-offset: 1px;
+}
+
+.tk-bulk-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--_tk-gap);
+}
+
+.tk-bulk-count {
+  color: var(--_tk-text-muted);
+  font-size: 0.9em;
+}
+
+.tk-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  color: var(--_tk-text-muted);
+  font-size: 0.9em;
+}
+
+.tk-page-size {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--_tk-gap);
+}
+
+.tk-page-size-select {
+  border: 1px solid var(--_tk-border);
+  background: var(--_tk-surface);
+  color: var(--_tk-text);
+  border-radius: var(--_tk-radius-control);
+  padding: 4px 6px;
+  font: inherit;
+}
+
+.tk-state-row td {
+  text-align: center;
+  padding: 32px var(--_tk-cell-x);
+  color: var(--_tk-text-muted);
+}
+
+.tk-error {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--_tk-danger);
+  background: var(--_tk-danger-surface);
+  border-radius: var(--_tk-radius-control);
+  padding: 14px 22px;
+}
+
+.tk-error p {
+  margin: 0;
+}
+
+.tk-skeleton {
+  height: 14px;
+  border-radius: var(--_tk-radius-control);
+  background: linear-gradient(
+    90deg,
+    var(--_tk-surface-muted) 25%,
+    var(--_tk-surface-hover) 50%,
+    var(--_tk-surface-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: tk-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes tk-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-skeleton {
+    animation: none;
+  }
+  .tk-row {
+    transition: none;
+  }
+}

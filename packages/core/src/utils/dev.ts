@@ -1,4 +1,7 @@
+// Core targets lib ES2020 with no platform types; declare the two host
+// globals it touches instead of pulling in DOM/Node type packages.
 declare const process: { env?: { NODE_ENV?: string } } | undefined;
+declare const console: { warn: (message: string) => void };
 
 export function isDev(): boolean {
   try {
