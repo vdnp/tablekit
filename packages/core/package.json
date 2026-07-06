@@ -1,0 +1,40 @@
+{
+  "name": "@tablekit/core",
+  "version": "0.1.0",
+  "description": "Platform-agnostic headless data table engine: sorting, filtering, pagination, selection, expanding, grouping.",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "datatable",
+    "table",
+    "headless",
+    "sorting",
+    "filtering",
+    "pagination"
+  ]
+}
