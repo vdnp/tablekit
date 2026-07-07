@@ -49,22 +49,18 @@ These are manual, done once. The pipeline can't do them for you.
 ### 1. Create an npm token for CI
 
 Log in to [npmjs.com](https://www.npmjs.com/) with an account that has **publish**
-rights on the `@vdnp` scope, then **Access Tokens → Generate New Token**. Either
-token type bypasses the interactive 2FA/OTP prompt that would otherwise hang CI.
+rights on the `@vdnp` scope, then **Access Tokens → Generate New Token**.
 
-**Granular Access Token (recommended):**
+**Use a Classic _Automation_ token** (Generate New Token → **Classic Token** →
+**Automation**). It is the only type **guaranteed** to bypass 2FA in CI. Do **not**
+pick "Publish" (prompts for an OTP → `EOTP` in the workflow).
 
-| Field | Value |
-| --- | --- |
-| Name | e.g. `tablekit-ci-release` |
-| Expiration | required — pick a date (max 365 days); set a rotation reminder, and update the `NPM_TOKEN` secret when it lapses |
-| Allowed IP ranges | leave **empty** (GitHub runners use dynamic IPs) |
-| Packages and scopes → Permissions | **Read and write** |
-| Packages and scopes → selection | the **`@vdnp`** scope (covers new packages too). If the scope isn't selectable before the first publish, use **All packages** temporarily, then rotate to a scope-scoped token |
-| Organizations → Permissions | **No access** (publishing needs package write, not org admin) |
-
-**Classic Token (alternative):** choose **Automation** (not "Publish", which
-prompts for an OTP).
+> ⚠️ A **Granular** token is *not* reliable here: if the npm account requires 2FA
+> for write actions, granular tokens still fail the publish with
+> `EOTP … requires a one-time password`. We hit exactly this on the first attempt
+> and switched to a Classic Automation token. (If you strongly prefer granular:
+> give it **Read and write** on the `@vdnp` scope, and set the account's 2FA to
+> "Authorization only" — but Automation is simpler and safer.)
 
 Copy the token (starts with `npm_…`) — you won't see it again.
 
@@ -190,6 +186,10 @@ already on npm**, so it's safe to re-run.
   un-published packages still need to go out at the *same* version.
 - **Bad token / 403:** rotate the npm automation token, update the `NPM_TOKEN`
   secret, re-run.
+- **`EOTP … requires a one-time password`:** the token authenticated but doesn't
+  bypass the account's 2FA-on-writes. Replace `NPM_TOKEN` with a **Classic
+  Automation** token (see step 1 — granular tokens can hit this), then re-run the
+  failed job. Nothing published in a run that ends this way, so a re-run is clean.
 - **Last-resort manual publish** (only if Actions is down), from a clean `main`
   at the versioned commit:
 
