@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "nextjs-app": "0.0.0",
+    "@vdnp/tablekit-core": "0.0.0",
+    "@vdnp/tablekit-react": "0.0.0",
+    "@vdnp/tablekit-react-native": "0.0.0",
+    "@vdnp/tablekit-theme": "0.0.0"
+  },
+  "changesets": []
+}
