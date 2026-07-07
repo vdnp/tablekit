@@ -78,4 +78,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -F nextjs-app build
+      # Use turbo so the @vdnp/tablekit-* deps are built first (build dependsOn
+      # ^build). `pnpm -F nextjs-app build` alone skips them, and `next build`
+      # then fails with "Can't resolve @vdnp/tablekit-*" (no dist on a fresh runner).
+      - run: pnpm exec turbo run build --filter=nextjs-app
