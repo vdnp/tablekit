@@ -181,7 +181,7 @@ Decisions (with rationale — revisit at 1.0):
   release.yml). Achievable on GitHub Actions → enabled for supply-chain
   attestation. Two manual prerequisites (flagged in the release checklist): the
   repo must be **public** and each package's `repository.url` must match the real
-  GitHub repo (placeholder `tablekit/tablekit` today) — otherwise disable it.
+  GitHub repo (now set to `github.com/vdnp/tablekit`) — otherwise disable it.
 - **CI vs release version pinning.** `release.yml` and future workflows get their
   pnpm/Node versions from the composite action `.github/actions/setup`. `ci.yml`
   still inlines `pnpm 9 / node 20` — left untouched per the release task's scope;

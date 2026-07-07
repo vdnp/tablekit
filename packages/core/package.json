@@ -5,11 +5,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tablekit/tablekit.git",
+    "url": "git+https://github.com/vdnp/tablekit.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/tablekit/tablekit/tree/main/packages/core#readme",
-  "bugs": "https://github.com/tablekit/tablekit/issues",
+  "homepage": "https://github.com/vdnp/tablekit/tree/main/packages/core#readme",
+  "bugs": "https://github.com/vdnp/tablekit/issues",
   "sideEffects": false,
   "type": "module",
   "main": "./dist/index.cjs",

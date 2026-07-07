@@ -68,13 +68,13 @@ These are manual, done once. The pipeline can't do them for you.
   doesn't exist yet, create the org/scope on npm, or rename the packages (see the
   first-release checklist).
 
-### 4. Set the real repository URL (required for provenance)
+### 4. Repository URL (required for provenance)
 
-Every publishable `package.json` has a placeholder
-`repository.url` of `git+https://github.com/tablekit/tablekit.git`. **Replace it
-with the real repository URL** in all four packages (and `homepage`/`bugs`).
-Provenance (below) validates this URL against the GitHub repo it publishes from —
-a mismatch fails the publish.
+All four packages point `repository.url` / `homepage` / `bugs` at
+**`https://github.com/vdnp/tablekit`**. Provenance validates this URL against the
+GitHub repo it publishes from, so if you ever fork or rename the repo, update
+these fields in every `packages/*/package.json` to match — a mismatch fails the
+publish.
 
 ### 5. Provenance (already enabled)
 
@@ -195,8 +195,8 @@ The first publish has never happened — do this once, deliberately:
 
 - [ ] **Scope confirmed** — `@vdnp` exists on npm and you can publish to it
       (or packages renamed everywhere: `package.json` names, imports, docs).
-- [ ] **`repository.url` / `homepage` / `bugs`** replaced with the real repo in
-      all four `packages/*/package.json` (placeholder is `tablekit/tablekit`).
+- [x] **`repository.url` / `homepage` / `bugs`** set to `github.com/vdnp/tablekit`
+      in all four `packages/*/package.json`.
 - [ ] **`NPM_TOKEN`** automation secret added (see one-time setup).
 - [ ] **Provenance decision** — repo is public (keep provenance) or private
       (remove `NPM_CONFIG_PROVENANCE` for now).
