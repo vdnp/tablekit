@@ -1,5 +1,5 @@
 {
-  "name": "@tablekit/react",
+  "name": "@vdnp/tablekit-react",
   "version": "0.0.0",
   "description": "React (DOM) adapter for TableKit: useDataTable() headless hook + accessible <DataTable /> component. SSR-safe, Next.js App Router ready.",
   "license": "MIT",
@@ -36,8 +36,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tablekit/core": "workspace:*",
-    "@tablekit/theme": "workspace:*"
+    "@vdnp/tablekit-core": "workspace:*",
+    "@vdnp/tablekit-theme": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

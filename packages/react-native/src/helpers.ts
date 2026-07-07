@@ -1,4 +1,4 @@
-import type { Column } from "@tablekit/core";
+import type { Column } from "@vdnp/tablekit-core";
 
 export interface CellLayout {
   width?: number;

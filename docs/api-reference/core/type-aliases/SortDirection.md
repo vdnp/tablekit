@@ -2,7 +2,7 @@
 
 > **SortDirection** = `"asc"` \| `"desc"`
 
-Public type surface of @tablekit/core.
+Public type surface of @vdnp/tablekit-core.
 
 Core is renderer-agnostic: render slots (`header`, `cell`) return `unknown`
 and are narrowed to platform node types by the adapters. Render slots are

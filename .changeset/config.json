@@ -3,7 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [
-    ["@tablekit/core", "@tablekit/react", "@tablekit/react-native", "@tablekit/theme"]
+    ["@vdnp/tablekit-core", "@vdnp/tablekit-react", "@vdnp/tablekit-react-native", "@vdnp/tablekit-theme"]
   ],
   "linked": [],
   "access": "public",

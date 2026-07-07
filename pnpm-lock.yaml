@@ -47,10 +47,10 @@ importers:
 
   examples/nextjs-app:
     dependencies:
-      '@tablekit/react':
+      '@vdnp/tablekit-react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@tablekit/theme':
+      '@vdnp/tablekit-theme':
         specifier: workspace:*
         version: link:../../packages/theme
       next:
@@ -90,10 +90,10 @@ importers:
 
   packages/react:
     dependencies:
-      '@tablekit/core':
+      '@vdnp/tablekit-core':
         specifier: workspace:*
         version: link:../core
-      '@tablekit/theme':
+      '@vdnp/tablekit-theme':
         specifier: workspace:*
         version: link:../theme
     devDependencies:
@@ -133,10 +133,10 @@ importers:
 
   packages/react-native:
     dependencies:
-      '@tablekit/core':
+      '@vdnp/tablekit-core':
         specifier: workspace:*
         version: link:../core
-      '@tablekit/theme':
+      '@vdnp/tablekit-theme':
         specifier: workspace:*
         version: link:../theme
     devDependencies:

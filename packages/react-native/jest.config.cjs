@@ -1,4 +1,4 @@
-// Jest config for @tablekit/react-native only. This is the ONE package in the
+// Jest config for @vdnp/tablekit-react-native only. This is the ONE package in the
 // monorepo that uses Jest instead of Vitest: React Native ships untranspiled
 // Flow source that Vitest's esbuild-based resolver cannot parse, so real
 // component tests need the official react-native Jest preset + Babel. See
@@ -15,8 +15,8 @@ module.exports = {
   moduleNameMapper: {
     // Resolve workspace deps to their TypeScript source so the Jest tests don't
     // require a prior `tsup` build and don't depend on package "exports" wiring.
-    "^@tablekit/core$": "<rootDir>/../core/src/index.ts",
-    "^@tablekit/theme$": "<rootDir>/../theme/src/index.ts",
+    "^@vdnp/tablekit-core$": "<rootDir>/../core/src/index.ts",
+    "^@vdnp/tablekit-theme$": "<rootDir>/../theme/src/index.ts",
     // The pre-existing pure-helper test imports test globals from "vitest";
     // this package now runs Jest, so map "vitest" to a Jest-backed shim instead
     // of rewriting that test file. (Types still come from the real vitest pkg.)

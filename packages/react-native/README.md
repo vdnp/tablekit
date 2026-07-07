@@ -1,7 +1,7 @@
-# @tablekit/react-native
+# @vdnp/tablekit-react-native
 
-The React Native adapter for [`@tablekit/core`](../core) — the **same headless
-engine and hook contract** as [`@tablekit/react`](../react), rendered with native
+The React Native adapter for [`@vdnp/tablekit-core`](../core) — the **same headless
+engine and hook contract** as [`@vdnp/tablekit-react`](../react), rendered with native
 primitives and virtualized through `FlatList` (or FlashList, injected).
 
 - [Quick start](#quick-start)
@@ -15,7 +15,7 @@ primitives and virtualized through `FlatList` (or FlashList, injected).
 ## Quick start
 
 ```bash
-npm i @tablekit/react-native @tablekit/theme
+npm i @vdnp/tablekit-react-native @vdnp/tablekit-theme
 # recommended for large lists:
 npm i @shopify/flash-list
 ```
@@ -24,7 +24,7 @@ Requires **React Native ≥ 0.72** and **React ≥ 18**. `react` and `react-nati
 are peer dependencies.
 
 ```tsx
-import { DataTable, createColumnHelper } from "@tablekit/react-native";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react-native";
 
 interface Player {
   id: number;
@@ -60,7 +60,7 @@ export function Roster({ players }: { players: Player[] }) {
 The column API, state model and `useDataTable()` hook are identical to the web
 adapter — only the interaction idioms change to match the platform:
 
-| Web (`@tablekit/react`) | React Native (`@tablekit/react-native`) |
+| Web (`@vdnp/tablekit-react`) | React Native (`@vdnp/tablekit-react-native`) |
 | --- | --- |
 | `onRowClick` | `onRowPress` |
 | — | `onRowLongPress` (native context-action idiom) |
@@ -77,7 +77,7 @@ Everything else — `enableSelection`, `bulkActions` / `onBulkAction`,
 Identical to the web hook — render with native components:
 
 ```tsx
-import { useDataTable } from "@tablekit/react-native";
+import { useDataTable } from "@vdnp/tablekit-react-native";
 import { FlatList, Text, View } from "react-native";
 
 interface Player {
@@ -122,8 +122,8 @@ depends on neither `FlatList` internals nor FlashList directly, it just needs a
 component matching the `VirtualListComponent` shape:
 
 ```tsx
-import { DataTable } from "@tablekit/react-native";
-import type { Row, VirtualListComponent } from "@tablekit/react-native";
+import { DataTable } from "@vdnp/tablekit-react-native";
+import type { Row, VirtualListComponent } from "@vdnp/tablekit-react-native";
 import { FlashList } from "@shopify/flash-list";
 
 interface Player {
@@ -153,8 +153,8 @@ Same `fetchData` contract as core/web — the component shows an `ActivityIndica
 while loading and a native error view with a Retry button on failure:
 
 ```tsx
-import { DataTable } from "@tablekit/react-native";
-import type { FetchParams, FetchResult } from "@tablekit/react-native";
+import { DataTable } from "@vdnp/tablekit-react-native";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-react-native";
 
 interface Order {
   id: number;
@@ -183,13 +183,13 @@ export function Orders() {
 
 ## Theming
 
-Styling comes from [`@tablekit/theme`](../theme) token objects — no StyleSheet
+Styling comes from [`@vdnp/tablekit-theme`](../theme) token objects — no StyleSheet
 overrides needed. Use the built-in dark palette or a custom token set:
 
 ```tsx
-import { DataTable } from "@tablekit/react-native";
-import { lightTheme } from "@tablekit/theme";
-import type { ThemeTokens } from "@tablekit/theme";
+import { DataTable } from "@vdnp/tablekit-react-native";
+import { lightTheme } from "@vdnp/tablekit-theme";
+import type { ThemeTokens } from "@vdnp/tablekit-theme";
 
 const brand: ThemeTokens = {
   ...lightTheme,
@@ -234,8 +234,8 @@ is scoped to this package — the config never leaks to the rest of the monorepo
 
 ```bash
 # from the repo root
-pnpm -F @tablekit/react-native test        # jest: helper + component tests
-pnpm -F @tablekit/react-native test -- --watch
+pnpm -F @vdnp/tablekit-react-native test        # jest: helper + component tests
+pnpm -F @vdnp/tablekit-react-native test -- --watch
 
 # or from packages/react-native
 pnpm test

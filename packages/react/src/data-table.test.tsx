@@ -1,5 +1,5 @@
-import { resetDevWarnings } from "@tablekit/core";
-import type { FetchParams, FetchResult } from "@tablekit/core";
+import { resetDevWarnings } from "@vdnp/tablekit-core";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-core";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";

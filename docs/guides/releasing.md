@@ -49,7 +49,7 @@ These are manual, done once. The pipeline can't do them for you.
 ### 1. Create an npm automation token
 
 1. Log in to [npmjs.com](https://www.npmjs.com/) with an account that has
-   **publish** rights on the `@tablekit` scope.
+   **publish** rights on the `@vdnp` scope.
 2. Avatar → **Access Tokens** → **Generate New Token** → **Classic Token**.
 3. Choose **Automation** (this type **bypasses 2FA**, which is required for CI —
    a "Publish" token would prompt for an OTP and hang the workflow).
@@ -62,7 +62,7 @@ These are manual, done once. The pipeline can't do them for you.
 - The workflow reads it as `${{ secrets.NPM_TOKEN }}` — it is **never** written
   into any file.
 
-### 3. Confirm the `@tablekit` scope exists
+### 3. Confirm the `@vdnp` scope exists
 
 - The scope must exist and your account/org must be able to publish to it. If it
   doesn't exist yet, create the org/scope on npm, or rename the packages (see the
@@ -99,7 +99,7 @@ CHANGELOG):
 pnpm changeset
 ```
 
-1. **Select affected packages.** Because the `@tablekit/*` packages are versioned
+1. **Select affected packages.** Because the `@vdnp/tablekit-*` packages are versioned
    in **lockstep** (see [CLAUDE.md → Release strategy](../../CLAUDE.md#release-strategy)),
    they all move to the same version anyway — but still select the ones your
    change actually affects so the CHANGELOG entries are accurate.
@@ -130,7 +130,7 @@ When a PR carrying changesets lands on `main`, `release.yml` opens (or updates) 
 bot PR titled **"chore: version packages"**. It:
 
 - consumes every `.changeset/*.md`,
-- bumps all `@tablekit/*` versions in lockstep,
+- bumps all `@vdnp/tablekit-*` versions in lockstep,
 - writes/updates each package's `CHANGELOG.md`,
 - updates internal dependency ranges.
 
@@ -149,7 +149,7 @@ git add .changeset/pre.json && git commit -m "chore: enter beta pre-release"
 ```
 
 While in pre mode, the Version PR produces `-beta.N` versions and publishing tags
-them on npm as `beta` (install with `npm i @tablekit/react@beta`). Each release
+them on npm as `beta` (install with `npm i @vdnp/tablekit-react@beta`). Each release
 increments the `.N`.
 
 Leave pre mode when you're ready for the stable line:
@@ -193,7 +193,7 @@ already on npm**, so it's safe to re-run.
 
 The first publish has never happened — do this once, deliberately:
 
-- [ ] **Scope confirmed** — `@tablekit` exists on npm and you can publish to it
+- [ ] **Scope confirmed** — `@vdnp` exists on npm and you can publish to it
       (or packages renamed everywhere: `package.json` names, imports, docs).
 - [ ] **`repository.url` / `homepage` / `bugs`** replaced with the real repo in
       all four `packages/*/package.json` (placeholder is `tablekit/tablekit`).

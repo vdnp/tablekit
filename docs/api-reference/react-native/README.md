@@ -1,4 +1,4 @@
-# @tablekit/react-native
+# @vdnp/tablekit-react-native
 
 ## Interfaces
 

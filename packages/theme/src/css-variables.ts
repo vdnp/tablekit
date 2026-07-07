@@ -1,6 +1,6 @@
 import type { ThemeTokens } from "./tokens";
 
-/** All CSS custom properties understood by @tablekit/react's stylesheet. */
+/** All CSS custom properties understood by @vdnp/tablekit-react's stylesheet. */
 export type TableKitCssVariables = Record<`--tk-${string}`, string>;
 
 /**

@@ -1,4 +1,4 @@
-# @tablekit/theme
+# @vdnp/tablekit-theme
 
 ## Interfaces
 

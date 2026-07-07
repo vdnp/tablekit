@@ -117,7 +117,7 @@ recreating `columns`/`data` each render is the most common perf regression.
 
 ```tsx
 import { FlashList } from "@shopify/flash-list";
-import type { Row, VirtualListComponent } from "@tablekit/react-native";
+import type { Row, VirtualListComponent } from "@vdnp/tablekit-react-native";
 
 <DataTable
   ListComponent={FlashList as unknown as VirtualListComponent<Row<T>>}
@@ -153,7 +153,7 @@ Guidance:
 
 ## Styling & theming
 
-- **Nothing is styled (web):** you forgot `import "@tablekit/react/styles.css";`
+- **Nothing is styled (web):** you forgot `import "@vdnp/tablekit-react/styles.css";`
   at your app root.
 - **Overrides don't apply:** set `--tk-*` variables on an **ancestor** of the
   table root, or pass a `theme` token object. The stylesheet uses low-specificity

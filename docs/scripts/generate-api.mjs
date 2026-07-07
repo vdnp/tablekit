@@ -48,12 +48,12 @@ for (const pkg of packages) {
 
   const project = await app.convert();
   if (!project) {
-    console.error(`✗ @tablekit/${pkg.name}: TypeDoc failed to convert`);
+    console.error(`✗ @vdnp/tablekit-${pkg.name}: TypeDoc failed to convert`);
     failed = true;
     continue;
   }
   await app.generateOutputs(project);
-  console.log(`✓ @tablekit/${pkg.name} → docs/api-reference/${pkg.name}`);
+  console.log(`✓ @vdnp/tablekit-${pkg.name} → docs/api-reference/${pkg.name}`);
 }
 
 if (failed) process.exit(1);

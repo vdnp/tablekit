@@ -1,9 +1,9 @@
 "use client";
 
-import { createTable, devWarn } from "@tablekit/core";
-import type { Column, Row, Table, TableOptions } from "@tablekit/core";
-import { themeToCssVariables } from "@tablekit/theme";
-import type { ThemeTokens } from "@tablekit/theme";
+import { createTable, devWarn } from "@vdnp/tablekit-core";
+import type { Column, Row, Table, TableOptions } from "@vdnp/tablekit-core";
+import { themeToCssVariables } from "@vdnp/tablekit-theme";
+import type { ThemeTokens } from "@vdnp/tablekit-theme";
 import {
   Fragment,
   useCallback,
@@ -140,7 +140,7 @@ function countLeafRows<TData>(row: Row<TData>): number {
 }
 
 /**
- * Batteries-included table renderer on top of @tablekit/core.
+ * Batteries-included table renderer on top of @vdnp/tablekit-core.
  * For full UI control, use useDataTable() and build your own markup.
  */
 export function DataTable<TData>(props: DataTableProps<TData>): ReactNode {

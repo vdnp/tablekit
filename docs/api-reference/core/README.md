@@ -1,4 +1,4 @@
-# @tablekit/core
+# @vdnp/tablekit-core
 
 ## Interfaces
 

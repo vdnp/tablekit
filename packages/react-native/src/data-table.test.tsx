@@ -1,8 +1,8 @@
 import { describe, expect, it, jest } from "@jest/globals";
 import { act, fireEvent, render, screen } from "@testing-library/react-native";
 import { ActivityIndicator, Text, View } from "react-native";
-import type { Row } from "@tablekit/core";
-import type { FetchParams, FetchResult } from "@tablekit/core";
+import type { Row } from "@vdnp/tablekit-core";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-core";
 import { DataTable, defaultLabels } from "./data-table";
 import type { VirtualListProps } from "./data-table";
 

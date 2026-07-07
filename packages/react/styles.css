@@ -1,7 +1,7 @@
 /*
- * @tablekit/react default theme.
+ * @vdnp/tablekit-react default theme.
  * Every value is a CSS variable with a light-mode fallback, so overriding is
- * as simple as setting --tk-* on any ancestor (see @tablekit/theme's
+ * as simple as setting --tk-* on any ancestor (see @vdnp/tablekit-theme's
  * themeToCssVariables). All selectors are :where()-wrapped where practical to
  * keep specificity low for consumer overrides.
  */

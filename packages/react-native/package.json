@@ -1,5 +1,5 @@
 {
-  "name": "@tablekit/react-native",
+  "name": "@vdnp/tablekit-react-native",
   "version": "0.0.0",
   "description": "React Native adapter for TableKit: useDataTable() headless hook + virtualized <DataTable /> built on FlatList (FlashList injectable).",
   "license": "MIT",
@@ -32,8 +32,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tablekit/core": "workspace:*",
-    "@tablekit/theme": "workspace:*"
+    "@vdnp/tablekit-core": "workspace:*",
+    "@vdnp/tablekit-theme": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

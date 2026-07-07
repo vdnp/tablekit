@@ -1,6 +1,6 @@
-# @tablekit/react
+# @vdnp/tablekit-react
 
-The React DOM adapter for [`@tablekit/core`](../core). Two ways in:
+The React DOM adapter for [`@vdnp/tablekit-core`](../core). Two ways in:
 
 - **`<DataTable />`** — a styled, accessible table with sorting, search,
   selection, bulk actions, edit/delete, pagination, expansion, pinning, resizing,
@@ -21,17 +21,17 @@ SSR-safe and Next.js App Router ready.
 ## Quick start
 
 ```bash
-npm i @tablekit/react @tablekit/theme
+npm i @vdnp/tablekit-react @vdnp/tablekit-theme
 ```
 
 Import the stylesheet **once** (e.g. in `app/layout.tsx` or your root):
 
 ```ts
-import "@tablekit/react/styles.css";
+import "@vdnp/tablekit-react/styles.css";
 ```
 
 ```tsx check
-import { DataTable, createColumnHelper } from "@tablekit/react";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react";
 
 interface User {
   id: number;
@@ -66,7 +66,7 @@ export function Users({ users }: { users: User[] }) {
 Three column kinds:
 
 ```tsx check
-import { createColumnHelper } from "@tablekit/react";
+import { createColumnHelper } from "@vdnp/tablekit-react";
 
 interface Employee {
   id: number;
@@ -116,7 +116,7 @@ Useful column flags: `sortable`, `filterable`, `resizable`, `pinned`
 call `useDataTable()` and render `table.getRowModel().flatRows` yourself:
 
 ```tsx check
-import { useDataTable } from "@tablekit/react";
+import { useDataTable } from "@vdnp/tablekit-react";
 
 interface User {
   id: number;
@@ -154,8 +154,8 @@ Pass a `state.<slice>` + `on<Slice>Change` pair to control any slice with your
 own React state; omit both to let TableKit manage it. Mix freely per slice.
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
-import type { SortingState } from "@tablekit/react";
+import { DataTable } from "@vdnp/tablekit-react";
+import type { SortingState } from "@vdnp/tablekit-react";
 import { useState } from "react";
 
 interface Row {
@@ -183,7 +183,7 @@ export function Controlled({ rows }: { rows: Row[] }) {
 ### Selection + bulk actions
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
+import { DataTable } from "@vdnp/tablekit-react";
 
 interface Doc {
   id: number;
@@ -215,7 +215,7 @@ Providing `onEdit` and/or `onDelete` appends an actions column with buttons;
 `onRowClick` makes the whole row clickable (and keyboard-activatable).
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
+import { DataTable } from "@vdnp/tablekit-react";
 
 interface Item {
   id: number;
@@ -246,7 +246,7 @@ Set `pinned: "left" | "right"` to stick a column while the table scrolls
 horizontally, and `resizable: true` to add a drag handle to its header:
 
 ```tsx check
-import { createColumnHelper } from "@tablekit/react";
+import { createColumnHelper } from "@vdnp/tablekit-react";
 
 interface Order {
   id: number;
@@ -270,8 +270,8 @@ shows a skeleton while loading and an error state with a working **Retry** on
 failure.
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
-import type { FetchParams, FetchResult } from "@tablekit/react";
+import { DataTable } from "@vdnp/tablekit-react";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-react";
 
 interface Order {
   id: number;
@@ -307,7 +307,7 @@ export function Orders() {
 Every visual state accepts your own component:
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
+import { DataTable } from "@vdnp/tablekit-react";
 
 interface Row {
   id: number;
@@ -350,12 +350,12 @@ fallbacks. Three levels of control:
 <DataTable colorScheme="dark" columns={columns} data={data} />
 ```
 
-**2. A theme token object** (from [`@tablekit/theme`](../theme)) applied as CSS
+**2. A theme token object** (from [`@vdnp/tablekit-theme`](../theme)) applied as CSS
 variables on the root element:
 
 ```tsx check
-import { DataTable } from "@tablekit/react";
-import { darkTheme } from "@tablekit/theme";
+import { DataTable } from "@vdnp/tablekit-react";
+import { darkTheme } from "@vdnp/tablekit-theme";
 
 export function Themed({ rows }: { rows: { id: number }[] }) {
   return (
@@ -377,7 +377,7 @@ export function Themed({ rows }: { rows: { id: number }[] }) {
 }
 ```
 
-See [@tablekit/theme](../theme/README.md) for the full token list.
+See [@vdnp/tablekit-theme](../theme/README.md) for the full token list.
 
 ## Accessibility
 
@@ -437,7 +437,7 @@ Extends `TableOptions<TData>` (so `columns`, `data`/`fetchData`, `getRowId`,
 
 ## Pitfalls & FAQ
 
-**Nothing renders / styles look off.** Import `@tablekit/react/styles.css` once
+**Nothing renders / styles look off.** Import `@vdnp/tablekit-react/styles.css` once
 at your app root.
 
 **Columns/data recreate every render.** Define `columns` at module scope or wrap

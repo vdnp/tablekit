@@ -1,7 +1,7 @@
 "use client";
 
-import { createTable } from "@tablekit/core";
-import type { Table, TableOptions } from "@tablekit/core";
+import { createTable } from "@vdnp/tablekit-core";
+import type { Table, TableOptions } from "@vdnp/tablekit-core";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 
 /**

@@ -11,7 +11,7 @@ export { cellLayout, formatCellText } from "./helpers";
 export type { CellLayout } from "./helpers";
 
 // Re-export the core surface users need to type their columns/handlers.
-export { createColumnHelper } from "@tablekit/core";
+export { createColumnHelper } from "@vdnp/tablekit-core";
 export type {
   CellContext,
   Column,
@@ -27,4 +27,4 @@ export type {
   Table,
   TableOptions,
   TableState,
-} from "@tablekit/core";
+} from "@vdnp/tablekit-core";

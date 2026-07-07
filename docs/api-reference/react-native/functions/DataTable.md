@@ -2,7 +2,7 @@
 
 > **DataTable**\<`TData`\>(`props`): `ReactNode`
 
-Virtualized table for React Native, driven by @tablekit/core. Rows render
+Virtualized table for React Native, driven by @vdnp/tablekit-core. Rows render
 through FlatList by default; inject FlashList via `ListComponent` for
 large lists.
 

@@ -51,7 +51,7 @@ Conceptually, a TanStack accessor column like "an `accessorKey` with a header an
 a custom cell renderer" becomes:
 
 ```ts
-import { createColumnHelper } from "@tablekit/core";
+import { createColumnHelper } from "@vdnp/tablekit-core";
 
 interface User {
   name: string;

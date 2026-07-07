@@ -1,7 +1,7 @@
 "use client";
 
-import { DataTable, createColumnHelper } from "@tablekit/react";
-import type { FetchParams, FetchResult } from "@tablekit/react";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-react";
 import { useCallback, useRef, useState } from "react";
 
 interface Order {

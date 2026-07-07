@@ -1,6 +1,6 @@
 "use client";
 
-import { devWarn } from "@tablekit/core";
+import { devWarn } from "@vdnp/tablekit-core";
 import { isValidElement } from "react";
 import type { ReactNode } from "react";
 

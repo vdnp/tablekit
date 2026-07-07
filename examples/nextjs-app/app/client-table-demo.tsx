@@ -1,8 +1,8 @@
 "use client";
 
-import { DataTable, createColumnHelper } from "@tablekit/react";
-import type { ColumnDef } from "@tablekit/react";
-import { darkTheme } from "@tablekit/theme";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react";
+import type { ColumnDef } from "@vdnp/tablekit-react";
+import { darkTheme } from "@vdnp/tablekit-theme";
 import { useMemo, useState } from "react";
 
 interface Employee {

@@ -1,4 +1,4 @@
-# @tablekit/react
+# @vdnp/tablekit-react
 
 ## Interfaces
 

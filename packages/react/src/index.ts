@@ -7,8 +7,8 @@ export type { BulkAction, DataTableLabels, DataTableProps } from "./data-table";
 export { formatCellValue, renderSlot } from "./render-slot";
 
 // Re-export the core surface users need to type their columns/handlers,
-// so `@tablekit/react` works standalone without importing core directly.
-export { createColumnHelper } from "@tablekit/core";
+// so `@vdnp/tablekit-react` works standalone without importing core directly.
+export { createColumnHelper } from "@vdnp/tablekit-core";
 export type {
   CellContext,
   Column,
@@ -24,4 +24,4 @@ export type {
   Table,
   TableOptions,
   TableState,
-} from "@tablekit/core";
+} from "@vdnp/tablekit-core";

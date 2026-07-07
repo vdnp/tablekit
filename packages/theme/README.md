@@ -1,4 +1,4 @@
-# @tablekit/theme
+# @vdnp/tablekit-theme
 
 The shared design-token source of truth for TableKit — colors, spacing, radii and
 typography — consumed by both the web and native adapters. One place to restyle
@@ -14,12 +14,12 @@ every table.
 ## Quick start
 
 ```bash
-npm i @tablekit/theme
+npm i @vdnp/tablekit-theme
 ```
 
 ```ts check
-import { darkTheme, lightTheme, themeToCssVariables } from "@tablekit/theme";
-import type { ThemeTokens } from "@tablekit/theme";
+import { darkTheme, lightTheme, themeToCssVariables } from "@vdnp/tablekit-theme";
+import type { ThemeTokens } from "@vdnp/tablekit-theme";
 
 // Extend a built-in theme:
 const brand: ThemeTokens = {
@@ -84,12 +84,12 @@ appropriate, React Native uses them directly. Both built-in palettes
 
 ## Web usage
 
-`@tablekit/react`'s stylesheet reads `--tk-*` CSS variables.
+`@vdnp/tablekit-react`'s stylesheet reads `--tk-*` CSS variables.
 `themeToCssVariables(tokens)` returns an object you can spread into `style` on any
 ancestor of the table:
 
 ```tsx check
-import { themeToCssVariables, darkTheme } from "@tablekit/theme";
+import { themeToCssVariables, darkTheme } from "@vdnp/tablekit-theme";
 import type { ReactNode } from "react";
 
 export function ThemedRegion({ children }: { children: ReactNode }) {
@@ -109,12 +109,12 @@ Or set individual variables in plain CSS — no JS needed:
 
 ## React Native usage
 
-`@tablekit/react-native` takes the token object directly via the `theme` prop —
+`@vdnp/tablekit-react-native` takes the token object directly via the `theme` prop —
 there is no CSS-variable step:
 
 ```ts check
-import { lightTheme } from "@tablekit/theme";
-import type { ThemeTokens } from "@tablekit/theme";
+import { lightTheme } from "@vdnp/tablekit-theme";
+import type { ThemeTokens } from "@vdnp/tablekit-theme";
 
 export const brand: ThemeTokens = {
   ...lightTheme,
@@ -130,7 +130,7 @@ Drive the theme from your app's color-scheme state and pass the matching token
 object (web can also just use `colorScheme="dark"` on `<DataTable />`):
 
 ```ts check
-import { darkTheme, lightTheme } from "@tablekit/theme";
+import { darkTheme, lightTheme } from "@vdnp/tablekit-theme";
 
 export function themeFor(scheme: "light" | "dark") {
   return scheme === "dark" ? darkTheme : lightTheme;

@@ -1,7 +1,7 @@
-import { createTable, devWarn } from "@tablekit/core";
-import type { Column, Row, Table, TableOptions } from "@tablekit/core";
-import { lightTheme, darkTheme } from "@tablekit/theme";
-import type { ThemeTokens } from "@tablekit/theme";
+import { createTable, devWarn } from "@vdnp/tablekit-core";
+import type { Column, Row, Table, TableOptions } from "@vdnp/tablekit-core";
+import { lightTheme, darkTheme } from "@vdnp/tablekit-theme";
+import type { ThemeTokens } from "@vdnp/tablekit-theme";
 import {
   useCallback,
   useEffect,
@@ -109,7 +109,7 @@ function pickTableOptions<TData>(props: DataTableProps<TData>): TableOptions<TDa
 }
 
 /**
- * Virtualized table for React Native, driven by @tablekit/core. Rows render
+ * Virtualized table for React Native, driven by @vdnp/tablekit-core. Rows render
  * through FlatList by default; inject FlashList via `ListComponent` for
  * large lists.
  */

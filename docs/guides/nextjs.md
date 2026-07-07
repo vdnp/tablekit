@@ -14,7 +14,7 @@ project's SSR integration test.
 ## Install & global setup
 
 ```bash
-pnpm add @tablekit/react @tablekit/theme
+pnpm add @vdnp/tablekit-react @vdnp/tablekit-theme
 ```
 
 Import the stylesheet once in the root layout (a Server Component — importing CSS
@@ -23,7 +23,7 @@ here is fine):
 ```tsx
 // app/layout.tsx
 import type { ReactNode } from "react";
-import "@tablekit/react/styles.css";
+import "@vdnp/tablekit-react/styles.css";
 import "./globals.css";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -62,8 +62,8 @@ use the `data` prop. Mark the file `"use client"`.
 // app/client-table-demo.tsx
 "use client";
 
-import { DataTable, createColumnHelper } from "@tablekit/react";
-import { darkTheme } from "@tablekit/theme";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react";
+import { darkTheme } from "@vdnp/tablekit-theme";
 import { useMemo, useState } from "react";
 
 interface Employee {
@@ -129,8 +129,8 @@ with a working **Retry** on failure.
 // app/server-table-demo.tsx
 "use client";
 
-import { DataTable, createColumnHelper } from "@tablekit/react";
-import type { FetchParams, FetchResult } from "@tablekit/react";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-react";
 import { useCallback } from "react";
 
 interface Order {

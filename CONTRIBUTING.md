@@ -48,7 +48,7 @@ Run from the repo root ([Turborepo](https://turbo.build) orchestrates per-packag
 | `pnpm lint` | ESLint (flat config) |
 | `pnpm docs:check` | Typecheck tagged doc snippets + validate relative links |
 | `pnpm changeset` | Record a change for release notes/versioning |
-| `pnpm -F @tablekit/core test -- --watch` | One package, watch mode |
+| `pnpm -F @vdnp/tablekit-core test -- --watch` | One package, watch mode |
 | `pnpm -F nextjs-app build` | End-to-end SSR check |
 
 ## The core/adapter rule
@@ -56,13 +56,13 @@ Run from the repo root ([Turborepo](https://turbo.build) orchestrates per-packag
 **Before adding a feature, decide where it lives:**
 
 1. **Does it change what the table *knows* — state, or the derived rows?**
-   → It belongs in **`@tablekit/core`**. Add the state slice + updater + pipeline
+   → It belongs in **`@vdnp/tablekit-core`**. Add the state slice + updater + pipeline
    step + unit tests there first, then surface it through *both* adapters.
 2. **Does it change only how the table *looks or behaves in the UI*?**
    → It belongs in the **adapter** (`react` / `react-native`) only. Never push
    platform code into core.
 3. **Is it a new visual default** (color, spacing, radius)?
-   → It belongs in **`@tablekit/theme`** as a token, consumed via CSS variables
+   → It belongs in **`@vdnp/tablekit-theme`** as a token, consumed via CSS variables
    (web) or the token object (native). Don't hardcode colors in adapters.
 
 Hard boundaries (enforced by review):

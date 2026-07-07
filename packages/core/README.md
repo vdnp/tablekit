@@ -1,8 +1,8 @@
-# @tablekit/core
+# @vdnp/tablekit-core
 
 The platform-agnostic engine behind TableKit. **No React, no DOM, zero runtime
 dependencies** — just table state and the derived row model. The
-[`@tablekit/react`](../react) and [`@tablekit/react-native`](../react-native)
+[`@vdnp/tablekit-react`](../react) and [`@vdnp/tablekit-react-native`](../react-native)
 adapters render whatever this core computes; you can also drive it from your own
 adapter, a test, or a script.
 
@@ -15,11 +15,11 @@ adapter, a test, or a script.
 ## Quick start
 
 ```bash
-npm i @tablekit/core
+npm i @vdnp/tablekit-core
 ```
 
 ```ts check
-import { createColumnHelper, createTable } from "@tablekit/core";
+import { createColumnHelper, createTable } from "@vdnp/tablekit-core";
 
 interface User {
   id: number;
@@ -100,8 +100,8 @@ sorting/filters/search/pagination to `fetchData`, and renders exactly the rows
 you return.
 
 ```ts check
-import { createTable } from "@tablekit/core";
-import type { FetchParams, FetchResult } from "@tablekit/core";
+import { createTable } from "@vdnp/tablekit-core";
+import type { FetchParams, FetchResult } from "@vdnp/tablekit-core";
 
 interface Order {
   id: number;
@@ -153,8 +153,8 @@ Each state slice can be **owned by you** (controlled) or **owned by core**
   mutates it; your callback must write it back for the change to take effect.
 
 ```ts check
-import { createTable } from "@tablekit/core";
-import type { PaginationState, SortingState } from "@tablekit/core";
+import { createTable } from "@vdnp/tablekit-core";
+import type { PaginationState, SortingState } from "@vdnp/tablekit-core";
 
 interface Row {
   id: number;
@@ -187,14 +187,14 @@ const table = createTable<Row>({
 
 > In React you never wire this by hand — `useDataTable`/`<DataTable />` pass your
 > `useState` setters straight through. See
-> [@tablekit/react](../react/README.md#controlled-state).
+> [@vdnp/tablekit-react](../react/README.md#controlled-state).
 
 ## Advanced usage
 
 ### Loading, error and refetch (server mode)
 
 ```ts check
-import { createTable } from "@tablekit/core";
+import { createTable } from "@vdnp/tablekit-core";
 
 const table = createTable<{ id: number }>({
   columns: [{ accessorKey: "id" }],
@@ -212,7 +212,7 @@ await table.refetch(); // re-run the fetcher with current params
 ### Custom sort and filter functions
 
 ```ts check
-import { createColumnHelper } from "@tablekit/core";
+import { createColumnHelper } from "@vdnp/tablekit-core";
 
 interface Person {
   name: string;
@@ -238,7 +238,7 @@ const columns = [
 ### Computed and display columns
 
 ```ts check
-import { createColumnHelper } from "@tablekit/core";
+import { createColumnHelper } from "@vdnp/tablekit-core";
 
 interface Person {
   firstName: string;

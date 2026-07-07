@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Column } from "@tablekit/core";
+import type { Column } from "@vdnp/tablekit-core";
 import { cellLayout, formatCellText } from "./helpers";
 
 function fakeColumn(def: Partial<Column<unknown>["def"]>): Column<unknown> {

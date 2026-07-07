@@ -1,5 +1,5 @@
-import { DataTable, createColumnHelper } from "@tablekit/react-native";
-import type { Row, VirtualListComponent } from "@tablekit/react-native";
+import { DataTable, createColumnHelper } from "@vdnp/tablekit-react-native";
+import type { Row, VirtualListComponent } from "@vdnp/tablekit-react-native";
 import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
 import { SafeAreaView, StatusBar, Switch, Text, View } from "react-native";

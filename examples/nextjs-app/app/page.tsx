@@ -9,8 +9,8 @@ export default function HomePage() {
       <header>
         <h1>TableKit demos</h1>
         <p>
-          One headless core (<code>@tablekit/core</code>), rendered by{" "}
-          <code>@tablekit/react</code> inside the Next.js App Router.
+          One headless core (<code>@vdnp/tablekit-core</code>), rendered by{" "}
+          <code>@vdnp/tablekit-react</code> inside the Next.js App Router.
         </p>
       </header>
 

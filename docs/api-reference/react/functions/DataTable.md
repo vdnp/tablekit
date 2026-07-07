@@ -2,7 +2,7 @@
 
 > **DataTable**\<`TData`\>(`props`): `ReactNode`
 
-Batteries-included table renderer on top of @tablekit/core.
+Batteries-included table renderer on top of @vdnp/tablekit-core.
 For full UI control, use useDataTable() and build your own markup.
 
 ## Type Parameters

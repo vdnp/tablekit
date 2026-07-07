@@ -14,17 +14,17 @@ resilience, and documentation are first-class requirements — not afterthoughts
 
 ```
 packages/
-  core/          @tablekit/core          Platform-agnostic engine. Zero runtime deps,
+  core/          @vdnp/tablekit-core          Platform-agnostic engine. Zero runtime deps,
                                          zero React. State (sorting, filtering, pagination,
                                          selection, expanding, grouping), column schema,
                                          data-source abstraction (array OR async fetcher),
                                          subscribe/getState store.
-  react/         @tablekit/react         DOM renderer. useDataTable() hook (headless entry)
+  react/         @vdnp/tablekit-react         DOM renderer. useDataTable() hook (headless entry)
                                          + <DataTable /> component. SSR-safe, 'use client'
                                          marked, a11y (aria-sort, keyboard nav).
-  react-native/  @tablekit/react-native  FlatList-based renderer (FlashList injectable via
+  react-native/  @vdnp/tablekit-react-native  FlatList-based renderer (FlashList injectable via
                                          `ListComponent` prop). Same core, same hook shape.
-  theme/         @tablekit/theme         Design tokens (spacing/color/typography/radius),
+  theme/         @vdnp/tablekit-theme         Design tokens (spacing/color/typography/radius),
                                          light+dark themes, CSS-variable names for web,
                                          plain token objects for native.
 examples/
@@ -51,7 +51,7 @@ it; omit both and core owns it internally. Partial control is allowed per-slice.
 
 ## Assumptions (made explicit, revisit before publish)
 
-- **Package scope:** `@tablekit/*`. Verify availability on npm before first publish; rename is a find/replace + changeset major if taken.
+- **Package scope:** `@vdnp/tablekit-*` (personal npm scope). Chosen over `@tablekit/*` because the `@tablekit` org name isn't owned; the four packages live under one scope as `@vdnp/tablekit-{core,react,react-native,theme}` (product name kept as a prefix). The whole rename was a single `@tablekit/` → `@vdnp/tablekit-` find/replace.
 - **License:** MIT.
 - **Minimum versions:** React ≥ 18.0, React Native ≥ 0.72, Next.js ≥ 14, TypeScript ≥ 5.0, Node ≥ 18.
 - **Peer deps only** for react/react-native — never bundle them.
@@ -69,15 +69,15 @@ it; omit both and core owns it internally. Partial control is allowed per-slice.
 - **Doc QC is home-grown, offline** (`docs/scripts/check-code-blocks.mjs`, `check-links.mjs`) instead of remark/markdown-link-check — no network, deterministic, and the code checker reuses the repo's own TypeScript. Only fenced blocks whose info string contains `check` are compiled (against package `src` via tsconfig `paths`, so no build needed); RN snippets stay unchecked because `react-native` isn't installed at the repo root (it's a dev dep of the RN package only). Re-checked after the Jest harness landed: still exempt — the Jest suite resolves `react-native` *inside* the package, a different mechanism from the root-based doc checker, so it doesn't unblock root snippet compilation.
 - **RN Jest harness (bare `react-native` preset, not `jest-expo`):** the adapter is a pure library importing only `react-native` core, so coupling its tests to the Expo runtime would be wrong and heavy (`jest-expo` is right for the Expo *example*, not the library). `@testing-library/react-native` pinned to **v12** (v13 targets React 19 / RN ≥ 0.78; we're on React 18.3 / RN 0.76).
 - **RN package runs Jest for *all* its tests** (`"test": "jest"`); the pre-existing Vitest helper tests keep running **untouched** via a `vitest` → `@jest/globals` shim (`jest.config.cjs` moduleNameMapper → `test/jest-vitest-shim.ts`). Chosen over `vitest run && jest` so the per-package split stays literally "this package = jest". `vitest` is kept as a dev dep purely so `tsc` resolves the helper test's `from "vitest"` types.
-- **Jest resolves workspace deps (`@tablekit/core`/`theme`) to `src`** via moduleNameMapper, so the RN tests need no prior build and don't depend on package `exports` wiring. `transformIgnorePatterns` is pnpm-aware (allow-lists react-native/@react-native*/@testing-library anywhere in the path) because pnpm nests real packages under `.pnpm/…/node_modules/…` and the stock RN pattern only matches a top-level `node_modules/react-native/`.
+- **Jest resolves workspace deps (`@vdnp/tablekit-core`/`theme`) to `src`** via moduleNameMapper, so the RN tests need no prior build and don't depend on package `exports` wiring. `transformIgnorePatterns` is pnpm-aware (allow-lists react-native/@react-native*/@testing-library anywhere in the path) because pnpm nests real packages under `.pnpm/…/node_modules/…` and the stock RN pattern only matches a top-level `node_modules/react-native/`.
 - **Turbo `test` is per-package and framework-agnostic** — it just runs each package's `test` script, so mixing Vitest and Jest across packages needed no turbo changes. Verified: root `pnpm test` runs Vitest (core, react) + Jest (react-native), exit 0. CI still splits them into separate jobs so one framework's failure can't mask the other's.
 
 ## Test strategy
 
 Two runners, on purpose — **do not "unify" them.**
 
-- **Vitest** for `@tablekit/core` and `@tablekit/react`: fast, esbuild-based, ideal for the pure engine and the jsdom web adapter.
-- **Jest** for `@tablekit/react-native` **only**: React Native ships untranspiled Flow source that Vitest's esbuild resolver cannot parse, so real RN component tests require the official `react-native` Jest preset + Babel. This is a **deliberate, isolated exception**, not tech debt — all Jest config lives in `packages/react-native` (`jest.config.cjs`, `babel.config.cjs`) and never leaks to the root or other packages.
+- **Vitest** for `@vdnp/tablekit-core` and `@vdnp/tablekit-react`: fast, esbuild-based, ideal for the pure engine and the jsdom web adapter.
+- **Jest** for `@vdnp/tablekit-react-native` **only**: React Native ships untranspiled Flow source that Vitest's esbuild resolver cannot parse, so real RN component tests require the official `react-native` Jest preset + Babel. This is a **deliberate, isolated exception**, not tech debt — all Jest config lives in `packages/react-native` (`jest.config.cjs`, `babel.config.cjs`) and never leaks to the root or other packages.
 
 Coverage: core has unit tests (state pipeline, server mode, resilience); react has Testing Library component tests; react-native has pure-helper tests **plus** Jest + `@testing-library/react-native` component tests (render, empty/error/retry, filtering, sorting, pagination, selection + bulk actions, `ListComponent` injection, a11y state). CI runs Vitest and Jest as **separate jobs** (`.github/workflows/ci.yml`) so neither masks the other.
 
@@ -105,7 +105,7 @@ pnpm lint               # eslint (flat config)
 pnpm changeset          # record a change for release notes/versioning
 pnpm docs:api           # regenerate docs/api-reference/** (TypeDoc markdown)
 pnpm docs:check         # typecheck tagged doc snippets + validate relative links
-pnpm -F @tablekit/core test -- --watch    # single package, watch mode
+pnpm -F @vdnp/tablekit-core test -- --watch    # single package, watch mode
 pnpm -F nextjs-app build                  # end-to-end SSR integration check
 ```
 
@@ -164,7 +164,7 @@ Decisions (with rationale — revisit at 1.0):
 - **Lockstep / `fixed` versioning** (`.changeset/config.json` → `fixed`), *not*
   independent. The four packages are tightly coupled (react/react-native depend on
   core + theme via `workspace:*` exact pins) and always released together from
-  `main`. Lockstep means `@tablekit/*` at the same version are guaranteed
+  `main`. Lockstep means `@vdnp/tablekit-*` at the same version are guaranteed
   compatible, which **eliminates** the "one goes major, another doesn't" breakage
   risk entirely — the cheapest correct model for a young, always-co-released
   family. Cost: an unchanged package still gets a version bump when a sibling
