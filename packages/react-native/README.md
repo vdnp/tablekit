@@ -225,17 +225,37 @@ Native accessibility maps to the same semantics as the web:
 Screen readers (VoiceOver / TalkBack) announce sort state, selection and page
 changes accordingly.
 
+## Testing
+
+This is the **only** package that uses **Jest** instead of Vitest: React Native
+ships untranspiled Flow source that Vitest's esbuild resolver can't parse, so
+component tests run through the official `react-native` Jest preset. Everything
+is scoped to this package — the config never leaks to the rest of the monorepo.
+
+```bash
+# from the repo root
+pnpm -F @tablekit/react-native test        # jest: helper + component tests
+pnpm -F @tablekit/react-native test -- --watch
+
+# or from packages/react-native
+pnpm test
+```
+
+Tests use [`@testing-library/react-native`](https://callstack.github.io/react-native-testing-library/).
+When adding tests, import test globals from `@jest/globals`
+(`import { describe, it, expect, jest } from "@jest/globals";`) so they type-check
+under the package's strict `tsconfig` (`types: []`). The whole suite (this
+package's Jest job and the other packages' Vitest job) runs as separate CI jobs.
+
 ## Known limitations
 
-- **Component tests** aren't run in CI: React Native ships untranspiled Flow
-  source that Vitest can't parse. The package is verified by `tsc` type-check
-  (against react-native 0.76 types) plus unit tests of its pure helpers
-  (`cellLayout`, `formatCellText`). Full component tests need a Jest +
-  `react-native` preset harness (planned before 1.0). Doc snippets here are
-  hand-verified for the same reason.
 - **Column resizing** is web-only (no drag handle on native).
 - **Horizontal scroll** is required for wide tables; size columns with `width`
   and set `minTableWidth` to tune the breakpoint.
+- **Doc snippets** in this README aren't auto-compiled by `pnpm docs:check`:
+  that checker resolves imports from the repo root, where `react-native` isn't
+  installed (it's a dev dependency of this package only). The snippets are
+  hand-verified; the component tests above are the real behavioral coverage.
 
 ## API reference
 

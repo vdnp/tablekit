@@ -2,7 +2,9 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["**/dist/**", "**/node_modules/**", "examples/**"] },
+  // *.cjs are CommonJS tooling configs (Jest/Babel) — not part of the typed
+  // source graph; skip them so `module.exports` doesn't trip no-undef.
+  { ignores: ["**/dist/**", "**/node_modules/**", "examples/**", "**/*.cjs"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

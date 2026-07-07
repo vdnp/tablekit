@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# One in-flight run per ref; newer pushes cancel older runs.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint · Typecheck · Build · Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm docs:check
+
+  test-vitest:
+    name: Unit tests (Vitest — core, react)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # turbo builds ^deps first (test dependsOn ^build).
+      - run: pnpm exec turbo run test --filter=@tablekit/core --filter=@tablekit/react
+
+  # Kept as a SEPARATE job from the Vitest one on purpose: @tablekit/react-native
+  # is the only package on Jest (RN's Flow source needs the react-native Jest
+  # preset). Isolating it means a Jest failure can't be masked by — or mask — the
+  # Vitest results, and vice versa. See CLAUDE.md → "Test strategy".
+  test-react-native:
+    name: Component tests (Jest — react-native)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec turbo run test --filter=@tablekit/react-native
+
+  # SSR end-to-end: the Next.js example builds against the published packages.
+  build-nextjs-example:
+    name: Next.js example build (SSR e2e)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm -F nextjs-app build
