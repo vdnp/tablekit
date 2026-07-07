@@ -1,17 +1,15 @@
-# Composite action: the single source of truth for the pnpm + Node versions and
-# the frozen install used by release.yml (and any future workflow). ci.yml still
-# inlines version: 9 / node 20 to match — it is intentionally left untouched by
-# the release task; adopting this action there is a safe follow-up. Keep the
-# versions here IN SYNC with .github/workflows/ci.yml.
+# Composite action shared by release.yml (and any future workflow). The pnpm
+# version is NOT passed here on purpose: it comes from the root package.json
+# "packageManager" field. pnpm/action-setup@v4 errors ("Multiple versions of
+# pnpm specified") if you set both `version:` here AND "packageManager" there,
+# which failed every early run — so packageManager is the single source of truth.
 name: Setup pnpm + Node
-description: Install pnpm 9, Node 20 (with npm registry auth wired for publishing) and the workspace deps from a frozen lockfile.
+description: Install pnpm (from packageManager), Node 20 (with npm registry auth wired for publishing) and the workspace deps from a frozen lockfile.
 
 runs:
   using: composite
   steps:
     - uses: pnpm/action-setup@v4
-      with:
-        version: 9
     - uses: actions/setup-node@v4
       with:
         node-version: 20

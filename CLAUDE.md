@@ -182,11 +182,12 @@ Decisions (with rationale — revisit at 1.0):
   attestation. Two manual prerequisites (flagged in the release checklist): the
   repo must be **public** and each package's `repository.url` must match the real
   GitHub repo (now set to `github.com/vdnp/tablekit`) — otherwise disable it.
-- **CI vs release version pinning.** `release.yml` and future workflows get their
-  pnpm/Node versions from the composite action `.github/actions/setup`. `ci.yml`
-  still inlines `pnpm 9 / node 20` — left untouched per the release task's scope;
-  adopting the composite action there is a safe follow-up. Keep the versions in
-  the composite action and ci.yml in sync until then.
+- **CI/release setup pinning.** The **pnpm version is single-sourced from the root
+  `package.json` "packageManager" field** — do NOT also pass `version:` to
+  `pnpm/action-setup@v4` (it errors "Multiple versions of pnpm specified" and every
+  job fails at setup; this bit the first pushes). Node 20 is still set inline via
+  `actions/setup-node` in both `ci.yml` and the composite action
+  `.github/actions/setup` (release.yml + future workflows use the composite action).
 - Pre-1.0: a breaking change may ship as a `minor` (0.x semantics), documented in
   the changeset. Post-1.0: strict semver.
 
