@@ -8,5 +8,7 @@
     "@vdnp/tablekit-react-native": "0.0.0",
     "@vdnp/tablekit-theme": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "initial-release"
+  ]
 }
