@@ -46,14 +46,27 @@ CI. A failing test blocks the release.
 
 These are manual, done once. The pipeline can't do them for you.
 
-### 1. Create an npm automation token
+### 1. Create an npm token for CI
 
-1. Log in to [npmjs.com](https://www.npmjs.com/) with an account that has
-   **publish** rights on the `@vdnp` scope.
-2. Avatar → **Access Tokens** → **Generate New Token** → **Classic Token**.
-3. Choose **Automation** (this type **bypasses 2FA**, which is required for CI —
-   a "Publish" token would prompt for an OTP and hang the workflow).
-4. Copy the token (starts with `npm_…`); you won't see it again.
+Log in to [npmjs.com](https://www.npmjs.com/) with an account that has **publish**
+rights on the `@vdnp` scope, then **Access Tokens → Generate New Token**. Either
+token type bypasses the interactive 2FA/OTP prompt that would otherwise hang CI.
+
+**Granular Access Token (recommended):**
+
+| Field | Value |
+| --- | --- |
+| Name | e.g. `tablekit-ci-release` |
+| Expiration | required — pick a date (max 365 days); set a rotation reminder, and update the `NPM_TOKEN` secret when it lapses |
+| Allowed IP ranges | leave **empty** (GitHub runners use dynamic IPs) |
+| Packages and scopes → Permissions | **Read and write** |
+| Packages and scopes → selection | the **`@vdnp`** scope (covers new packages too). If the scope isn't selectable before the first publish, use **All packages** temporarily, then rotate to a scope-scoped token |
+| Organizations → Permissions | **No access** (publishing needs package write, not org admin) |
+
+**Classic Token (alternative):** choose **Automation** (not "Publish", which
+prompts for an OTP).
+
+Copy the token (starts with `npm_…`) — you won't see it again.
 
 ### 2. Add it to GitHub Secrets
 
