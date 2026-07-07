@@ -1,3 +1,5 @@
 packages:
   - "packages/*"
-  - "examples/*"
+  # expo-app is intentionally NOT in the workspace: the RN/Expo toolchain is
+  # too heavy for root installs/CI. Run `pnpm install` inside it to try it.
+  - "examples/nextjs-app"
