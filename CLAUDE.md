@@ -1,7 +1,7 @@
 # TableKit — Universal Headless DataTable
 
 > **Living document.** Update this file after every significant architectural decision.
-> Last updated: 2026-07-07
+> Last updated: 2026-07-07 (initial build complete: 4 packages, 55 tests, Next.js e2e verified)
 
 ## Purpose
 
@@ -29,7 +29,8 @@ packages/
                                          plain token objects for native.
 examples/
   nextjs-app/    Next.js App Router example — also serves as the SSR integration test.
-  expo-app/      Source-only Expo example (not installed in CI; RN toolchain too heavy).
+  expo-app/      Source-only Expo example — intentionally OUTSIDE the pnpm workspace
+                 (see pnpm-workspace.yaml) so root installs stay light.
 ```
 
 **Dependency direction (strict):** `core ← react`, `core ← react-native`, `theme ← react|react-native`.
@@ -54,7 +55,17 @@ it; omit both and core owns it internally. Partial control is allowed per-slice.
 - **License:** MIT.
 - **Minimum versions:** React ≥ 18.0, React Native ≥ 0.72, Next.js ≥ 14, TypeScript ≥ 5.0, Node ≥ 18.
 - **Peer deps only** for react/react-native — never bundle them.
-- **RN component tests:** RN's untranspiled Flow source doesn't run under Vitest. The RN package is verified by `tsc` type-check + Vitest tests of its pure helpers; full component tests require a Jest + `react-native` preset harness (tracked as TODO, do it before 1.0).
+- **RN component tests:** RN's untranspiled Flow source doesn't run under Vitest. The RN package is verified by `tsc` type-check (against react-native 0.76 types) + Vitest tests of its pure helpers; full component tests require a Jest + `react-native` preset harness (tracked as TODO, do it before 1.0).
+- **Example app pins:** nextjs-app uses Next 14 + React 18 (Next 15 pulls React 19; revisit when adapters are tested against 19).
+
+## Decisions log
+
+- `useDataTable` is intentionally **duplicated** in react and react-native (≈25 lines) rather than shared — adapters must not depend on each other, and a fourth "react-common" package isn't worth it at this size.
+- Core declares `process`/`console` locally in `utils/dev.ts` instead of adding DOM/Node type deps (lib stays ES2020). Microtask scheduling uses `Promise.resolve().then` for the same reason.
+- The `"use client"` directive is injected via tsup `banner` for the whole react package. tsup's treeshake pass logs "Module level directives … ignored" warnings — benign; the banner still lands first in dist. Verified by the Next.js production build.
+- Render slots (`header`/`cell`) are declared with **method syntax** in `ColumnDef` so column defs stay assignable across `TValue` without `any` (methods are bivariant under strict mode).
+- `<DataTable table={instance} />` skips `mount()`/`setOptions()` — the owning `useDataTable` call already handles both; double-mounting would double-fetch.
+- Group rows default to **expanded**; the `expanded` map stores `false` to collapse them (leaf detail rows default collapsed, storing `true`).
 
 ## Code style
 
