@@ -1,6 +1,6 @@
 {
   "name": "@vdnp/tablekit-theme",
-  "version": "0.0.0",
+  "version": "0.1.0-beta.0",
   "description": "Design tokens (colors, spacing, typography, radii) for TableKit — consumable from web (CSS variables) and React Native (token objects).",
   "license": "MIT",
   "repository": {
