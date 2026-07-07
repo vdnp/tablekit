@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [],
+  "fixed": [
+    ["@tablekit/core", "@tablekit/react", "@tablekit/react-native", "@tablekit/theme"]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",

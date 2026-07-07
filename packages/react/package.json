@@ -1,8 +1,15 @@
 {
   "name": "@tablekit/react",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "React (DOM) adapter for TableKit: useDataTable() headless hook + accessible <DataTable /> component. SSR-safe, Next.js App Router ready.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tablekit/tablekit.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/tablekit/tablekit/tree/main/packages/react#readme",
+  "bugs": "https://github.com/tablekit/tablekit/issues",
   "sideEffects": [
     "*.css"
   ],

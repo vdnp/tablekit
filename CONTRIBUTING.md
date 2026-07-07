@@ -98,7 +98,10 @@ Then:
 3. Write a short, user-facing summary (this becomes the changelog entry).
 4. Commit the generated file under `.changeset/` with your change.
 
-Maintainers run `pnpm version-packages` and `pnpm release` to publish.
+You don't publish anything — pushing your changeset to `main` lets CI open a
+**"Version Packages"** PR, and merging that PR publishes to npm automatically.
+The full flow (and one-time maintainer setup) is in the
+[release guide](docs/guides/releasing.md).
 
 ## Before you open a PR
 

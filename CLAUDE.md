@@ -152,11 +152,43 @@ them complete and correct (RN snippets stay untagged — see decisions log).
 without a build) but regenerated, never hand-edited. Re-run `pnpm docs:api` and
 `pnpm docs:check` before publishing.
 
-## Versioning / releases
+## Release strategy
 
-- **Changesets** drive versions and CHANGELOG. Every user-facing change gets `pnpm changeset` (patch = fix, minor = feature, major = breaking API).
-- All `@tablekit/*` packages version independently but are released together from `main`.
-- Pre-1.0: minor may include breaking changes (documented in changeset). Post-1.0: strict semver.
+**Changesets** drive versions + CHANGELOG; **`changesets/action`** automates it.
+Flow: a changeset merged to `main` → `.github/workflows/release.yml` opens a
+"Version Packages" PR; merging that PR publishes to npm. No manual `npm publish`.
+Full runbook: [docs/guides/releasing.md](docs/guides/releasing.md).
+
+Decisions (with rationale — revisit at 1.0):
+
+- **Lockstep / `fixed` versioning** (`.changeset/config.json` → `fixed`), *not*
+  independent. The four packages are tightly coupled (react/react-native depend on
+  core + theme via `workspace:*` exact pins) and always released together from
+  `main`. Lockstep means `@tablekit/*` at the same version are guaranteed
+  compatible, which **eliminates** the "one goes major, another doesn't" breakage
+  risk entirely — the cheapest correct model for a young, always-co-released
+  family. Cost: an unchanged package still gets a version bump when a sibling
+  changes (minor changelog noise). Revisit if release cadences diverge post-1.0;
+  the exit is switching `fixed` → independent + `updateInternalDependencies`.
+- **Versions start at `0.0.0`.** The publishable packages sit at `0.0.0` so the
+  existing `initial-release` (minor) changeset makes the **first** published
+  version a clean `0.1.0` (idiomatic Changesets: 0.0.0 is the "never published"
+  sentinel). `pnpm release:status` confirms 0.0.0 → 0.1.0 across all four.
+- **Beta / pre-release** supported via `changeset pre enter beta` (writes
+  `.changeset/pre.json`); `changesets/action` auto-detects it, no workflow change.
+  The first public line will likely be `0.1.0-beta.0`.
+- **npm provenance ON** (`NPM_CONFIG_PROVENANCE=true` + `id-token: write` in
+  release.yml). Achievable on GitHub Actions → enabled for supply-chain
+  attestation. Two manual prerequisites (flagged in the release checklist): the
+  repo must be **public** and each package's `repository.url` must match the real
+  GitHub repo (placeholder `tablekit/tablekit` today) — otherwise disable it.
+- **CI vs release version pinning.** `release.yml` and future workflows get their
+  pnpm/Node versions from the composite action `.github/actions/setup`. `ci.yml`
+  still inlines `pnpm 9 / node 20` — left untouched per the release task's scope;
+  adopting the composite action there is a safe follow-up. Keep the versions in
+  the composite action and ci.yml in sync until then.
+- Pre-1.0: a breaking change may ship as a `minor` (0.x semantics), documented in
+  the changeset. Post-1.0: strict semver.
 
 ## Do NOT
 

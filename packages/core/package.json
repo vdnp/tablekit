@@ -1,8 +1,15 @@
 {
   "name": "@tablekit/core",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Platform-agnostic headless data table engine: sorting, filtering, pagination, selection, expanding, grouping.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tablekit/tablekit.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/tablekit/tablekit/tree/main/packages/core#readme",
+  "bugs": "https://github.com/tablekit/tablekit/issues",
   "sideEffects": false,
   "type": "module",
   "main": "./dist/index.cjs",

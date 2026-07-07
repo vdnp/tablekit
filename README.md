@@ -1,5 +1,19 @@
 # TableKit
 
+<!--
+  npm badges — ready to enable AFTER the first successful publish (until then
+  they 404 because the packages don't exist on the registry yet; see
+  docs/guides/releasing.md → first-release checklist). Uncomment this block once
+  @tablekit/* is live on npm:
+
+  [![@tablekit/core](https://img.shields.io/npm/v/@tablekit/core?label=%40tablekit%2Fcore)](https://www.npmjs.com/package/@tablekit/core)
+  [![@tablekit/react](https://img.shields.io/npm/v/@tablekit/react?label=%40tablekit%2Freact)](https://www.npmjs.com/package/@tablekit/react)
+  [![@tablekit/react-native](https://img.shields.io/npm/v/@tablekit/react-native?label=%40tablekit%2Freact-native)](https://www.npmjs.com/package/@tablekit/react-native)
+  [![@tablekit/theme](https://img.shields.io/npm/v/@tablekit/theme?label=%40tablekit%2Ftheme)](https://www.npmjs.com/package/@tablekit/theme)
+  [![downloads](https://img.shields.io/npm/dm/@tablekit/react?label=downloads)](https://www.npmjs.com/package/@tablekit/react)
+  [![license](https://img.shields.io/npm/l/@tablekit/react)](LICENSE)
+-->
+
 **One headless table engine. Web, Next.js, and React Native — same API, same types.**
 
 TableKit is a production-grade DataTable split into a platform-agnostic **core**
@@ -77,8 +91,9 @@ export function Users({ users }: { users: User[] }) {
 | [`@tablekit/react-native`](packages/react-native) | React Native adapter (FlatList/FlashList) | `npm i @tablekit/react-native` |
 | [`@tablekit/theme`](packages/theme) | Shared design tokens + light/dark themes | `npm i @tablekit/theme` |
 
-> npm package names are placeholders pending scope availability — see
-> [CLAUDE.md](CLAUDE.md) assumptions.
+> npm package names are placeholders pending scope availability and the first
+> publish — see [CLAUDE.md](CLAUDE.md) assumptions and the
+> [release guide](docs/guides/releasing.md).
 
 ## Install
 

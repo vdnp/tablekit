@@ -1,0 +1,24 @@
+# Composite action: the single source of truth for the pnpm + Node versions and
+# the frozen install used by release.yml (and any future workflow). ci.yml still
+# inlines version: 9 / node 20 to match — it is intentionally left untouched by
+# the release task; adopting this action there is a safe follow-up. Keep the
+# versions here IN SYNC with .github/workflows/ci.yml.
+name: Setup pnpm + Node
+description: Install pnpm 9, Node 20 (with npm registry auth wired for publishing) and the workspace deps from a frozen lockfile.
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: pnpm
+        # Writes an .npmrc pointing at npm and referencing NODE_AUTH_TOKEN, so
+        # `changeset publish` can authenticate. No token is embedded here — the
+        # value is injected at publish time from the NPM_TOKEN secret.
+        registry-url: https://registry.npmjs.org
+    - run: pnpm install --frozen-lockfile
+      shell: bash

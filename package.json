@@ -13,6 +13,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
+    "release:status": "changeset status --verbose",
     "docs:api": "node docs/scripts/generate-api.mjs",
     "docs:check-code": "node docs/scripts/check-code-blocks.mjs",
     "docs:check-links": "node docs/scripts/check-links.mjs",
